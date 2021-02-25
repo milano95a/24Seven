@@ -15,25 +15,8 @@ class HomeController: UIViewController {
     let onDiscount = 3
     let news = 4
     
-    var newsSource: [News] = [
-        News(image: "news1", date: "10.10.2020", title: "Теперь Microsoft рассказала всё: полный официальный видеообзор Xbox Series.."),
-        News(image: "news2", date: "10.10.2020", title: "Представлен Oppo X 2021 — смартфон с растягивающимся экраном"),
-        News(image: "news3", date: "10.10.2020", title: "Дизайн в стиле культового iPhone 4, OLED и мощная SoC. Долгожданный iPhone"),
-        News(image: "news1", date: "10.10.2020", title: "Теперь Microsoft рассказала всё: полный официальный видеообзор Xbox Series.."),
-        News(image: "news2", date: "10.10.2020", title: "Представлен Oppo X 2021 — смартфон с растягивающимся экраном"),
-        News(image: "news3", date: "10.10.2020", title: "Дизайн в стиле культового iPhone 4, OLED и мощная SoC. Долгожданный iPhone"),
-    ]
-    
-    var productsSource: [Product] = [
-        Product(image: "product1", discount: 20, isFavourite: false, numberOfcomments: 15, name: "Яблоко Бойка", price: 8990, isNew: true, isPopular: false),
-        Product(image: "product2", discount: 0, isFavourite: true, numberOfcomments: 15, name: "Груша Abate", price: 20490, isNew: true, isPopular: false),
-        Product(image: "product3", discount: 20, isFavourite: false, numberOfcomments: 15, name: "Яблоко Бойка", price: 8990, isNew: true, isPopular: false),
-        Product(image: "product4", discount: 0, isFavourite: true, numberOfcomments: 15, name: "Груша Abate", price: 20490, isNew: true, isPopular: false),
-        Product(image: "product4", discount: 20, isFavourite: true, numberOfcomments: 15, name: "Яблоко Бойка", price: 8990, isNew: false, isPopular: true),
-        Product(image: "product3", discount: 0, isFavourite: false, numberOfcomments: 15, name: "Груша Abate", price: 20490, isNew: false, isPopular: true),
-        Product(image: "product2", discount: 20, isFavourite: true, numberOfcomments: 15, name: "Яблоко Бойка", price: 8990, isNew: false, isPopular: true),
-        Product(image: "product1", discount: 0, isFavourite: false, numberOfcomments: 15, name: "Груша Abate", price: 20490, isNew: false, isPopular: true),
-    ]
+    var productsSource = Product.productsSource
+    var newsSource = News.newsSource
     
     let newHeader = Header(label: "Новые товары", more: "Посмотреть все")
     let popularHeader = Header(label: "Популярные товары", more: "Посмотреть все")

@@ -144,14 +144,3 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }
 }
 
-struct Product {
-    var image = ""
-    var discount = 0
-    var isFavourite = false
-    var numberOfcomments = 0
-    var name = ""
-    var price = 0
-    var isNew = false
-    var isPopular = false
-}
-

@@ -73,9 +73,3 @@ class NewsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-struct News {
-    var image = ""
-    var date = ""
-    var title = ""
-}

@@ -123,6 +123,14 @@ extension UIImage {
     static var banner: UIImage {
         return UIImage(named: "BannerPlaceholder")!
     }
+    
+    static var _24Seven: UIImage {
+        return UIImage(named: "24Seven")!
+    }
+    
+    static var logo: UIImage {
+        return UIImage(named: "Logo")!
+    }
 }
 
 class CustomLabel: UILabel {
