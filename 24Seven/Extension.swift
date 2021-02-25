@@ -55,7 +55,7 @@ extension UIView {
     func roundCorners(radius: CGFloat = 8, corners: UIRectCorner = []) {
         if corners.isEmpty {
             self.layer.cornerRadius = radius
-
+            
         } else {
             let size = CGSize(width: radius, height: radius)
             
@@ -209,5 +209,11 @@ extension UIImageView {
         self.image = img
         self.contentMode = contentMode
         self.backgroundColor = backgroundColor
+    }
+}
+
+extension UIView {
+    var statusBarHeight: CGFloat {
+        return self.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
     }
 }

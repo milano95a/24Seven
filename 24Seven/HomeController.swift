@@ -34,10 +34,38 @@ class HomeController: UIViewController {
         view.addSubview(vStackView)
         
         vStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        vStackView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        vStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         vStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         vStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
+        setUpContentLayout()
+    }
+    
+    private func setUpContentLayout(){
+        
+        let logoContainer = UIView()
+        vStackView.addArrangedSubview(logoContainer)
+        logoContainer.translatesAutoresizingMaskIntoConstraints = false
+        logoContainer.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        
+        let hStackView = UIStackView(backgroundColor: .clear)
+        logoContainer.addSubview(hStackView)
+        hStackView.axis = .horizontal
+        hStackView.centerXAnchor.constraint(equalTo: logoContainer.centerXAnchor).isActive = true
+        hStackView.centerYAnchor.constraint(equalTo: logoContainer.centerYAnchor).isActive = true
+        
+        let logo = UIImageView(img: .logo, contentMode: .center, backgroundColor: .clear)
+        hStackView.addArrangedSubview(logo)
+        
+        let _24Seven = UIImageView(img: ._24Seven, contentMode: .center, backgroundColor: .clear)
+        hStackView.addArrangedSubview(_24Seven)
+
+        setupCollectionView()
+        vStackView.addArrangedSubview(collectionView)
+
+    }
+    
+    private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: configureLayout())
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -54,10 +82,6 @@ class HomeController: UIViewController {
         collectionView.register(SectionHeaderCollectionReusableView.self, forSupplementaryViewOfKind: String(describing: SectionHeaderCollectionReusableView.self), withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self))
         
         collectionView.backgroundColor = .clear
-        
-        vStackView.addArrangedSubview(collectionView)
-//        view.addSubview(collectionView)
-
     }
     
     private func configureLayout() -> UICollectionViewCompositionalLayout {
