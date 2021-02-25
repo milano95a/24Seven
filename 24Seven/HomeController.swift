@@ -24,16 +24,20 @@ class HomeController: UIViewController {
     var newsSource = News.newsSource
 
     var collectionView: UICollectionView!
-    var VStackView: UIStackView!
+    var vStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
         
-        VStackView = UIStackView()
+        vStackView = UIStackView(backgroundColor: .clear)
+        view.addSubview(vStackView)
         
-//        view.addSubview(VStackView)
-
+        vStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        vStackView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        vStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        vStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: configureLayout())
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -51,8 +55,8 @@ class HomeController: UIViewController {
         
         collectionView.backgroundColor = .clear
         
-//        VStackView.addArrangedSubview(collectionView)
-        view.addSubview(collectionView)
+        vStackView.addArrangedSubview(collectionView)
+//        view.addSubview(collectionView)
 
     }
     
