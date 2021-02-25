@@ -15,7 +15,7 @@ class BannerCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.image = UIImage(named: "BannerPlaceholder")
-        imageView.roundCorners()
+        
         return imageView
     }()
     
@@ -23,7 +23,8 @@ class BannerCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         contentView.addSubview(bannerImageView)
-
+        contentView.roundCorners()
+        
         NSLayoutConstraint.activate([
             bannerImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             bannerImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -38,8 +39,3 @@ class BannerCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension UIView {
-    func roundCorners() {
-        self.layer.cornerRadius = 8
-    }
-}

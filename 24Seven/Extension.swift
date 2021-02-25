@@ -28,11 +28,121 @@ extension NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 16, trailing: 0)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.46),
-                                               heightDimension: .absolute(260))
+                                               heightDimension: .estimated(260))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                        subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
         return section
+    }
+}
+
+extension UIView {
+    func roundCorners(radius: CGFloat = 8) {
+        self.layer.cornerRadius = radius
+    }
+    
+    func shadow() {
+        self.layer.shadowColor = UIColor.gray.cgColor
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 2
+        self.layer.shadowOpacity = 0.2
+    }
+}
+
+extension UIColor {
+    static var orange : UIColor {
+        return UIColor(named: "orange")!
+    }
+    
+    static var black: UIColor {
+        return UIColor(named: "black")!
+    }
+    
+    static var gray: UIColor {
+        return UIColor(named: "grey")!
+    }
+}
+
+extension UIImage {
+    
+    static var cart: UIImage {
+        return UIImage(named: "Cart")!
+    }
+    
+    static var comment: UIImage {
+        return UIImage(named: "Comment")!
+    }
+}
+
+class CustomLabel: UILabel {
+    
+    var topInset: CGFloat = 4
+    var bottomInset: CGFloat = 0
+    var leftInset: CGFloat = 8
+    var rightInset: CGFloat = 8
+    
+    convenience init(fontSize: CGFloat, textColor: UIColor = .gray, weight: UIFont.Weight = .regular) {
+        self.init()
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.font = UIFont.systemFont(ofSize: fontSize, weight: weight)
+        self.textColor = textColor
+    }
+    
+    override func drawText(in rect: CGRect) {
+        let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+        super.drawText(in: rect.inset(by: insets))
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        return CGSize(width: size.width + leftInset + rightInset,
+                      height: size.height + topInset + bottomInset)
+    }
+    
+    override var bounds: CGRect {
+        didSet {
+            // ensures this works within stack views if multi-line
+            preferredMaxLayoutWidth = bounds.width - (leftInset + rightInset)
+        }
+    }
+}
+
+extension UIView {
+    func round(corners: UIRectCorner, radius: CGFloat) {
+        
+        let size = CGSize(width: radius, height: radius)
+        
+        let path = UIBezierPath(
+            roundedRect: self.bounds,
+            byRoundingCorners: corners,
+            cornerRadii: size)
+        
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        
+        self.layer.mask = mask
+    }
+}
+
+extension NSMutableAttributedString {
+    static func strikeThroughText(with text: String) -> NSMutableAttributedString {
+        
+        let attributeString =  NSMutableAttributedString(string: text)
+        let range = NSMakeRange(0, attributeString.length)
+        attributeString.addAttribute(.strikethroughStyle, value: 2, range: range)
+        
+        return attributeString
+    }
+    
+    static func textStartWith(image: UIImage, text: String) -> NSMutableAttributedString {
+        
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = .comment
+        let attributeString = NSMutableAttributedString(attachment: imageAttachment)
+        attributeString.append(NSAttributedString(string: " "))
+        attributeString.append(NSAttributedString(string: text))
+        
+        return attributeString
     }
 }

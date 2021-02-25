@@ -8,25 +8,28 @@
 import UIKit
 
 class HomeController: UIViewController {
-
+    
     var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        configure collection view
+        
+        //        configure collection view
         collectionView = UICollectionView(frame: view.frame,
                                           collectionViewLayout: configureLayout())
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(
-            UICollectionViewCell.self,
-            forCellWithReuseIdentifier: String(describing: UICollectionViewCell.self))
+
         collectionView.register(
             BannerCollectionViewCell.self,
             forCellWithReuseIdentifier: String(describing: BannerCollectionViewCell.self))
-
-        collectionView.backgroundColor = .white
+        collectionView.register(
+            ProductCollectionViewCell.self,
+            forCellWithReuseIdentifier: String(describing: ProductCollectionViewCell.self))
+        collectionView.register(
+            NewsCollectionViewCell.self,
+            forCellWithReuseIdentifier: String(describing: NewsCollectionViewCell.self))
+        collectionView.backgroundColor = UIColor(named: "Background")
         
         view.addSubview(collectionView)
     }
@@ -65,12 +68,19 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource {
             ) as! BannerCollectionViewCell
             
             return cell
+        case 1...3:
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: String(describing: ProductCollectionViewCell.self),
+                for: indexPath
+            ) as! ProductCollectionViewCell
+            
+            return cell
         default:
             let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: String(describing: UICollectionViewCell.self),
+                withReuseIdentifier: String(describing: NewsCollectionViewCell.self),
                 for: indexPath
-            )
-            cell.backgroundColor = .red
+            ) as! NewsCollectionViewCell
+            
             return cell
         }
     }
