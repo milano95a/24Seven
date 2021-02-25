@@ -10,7 +10,12 @@ import UIKit
 class HomeController: UIViewController {
     
     var news: [News] = [
-        News()
+        News(image: "news1", date: "10.10.2020", title: "Теперь Microsoft рассказала всё: полный официальный видеообзор Xbox Series.."),
+        News(image: "news2", date: "10.10.2020", title: "Представлен Oppo X 2021 — смартфон с растягивающимся экраном"),
+        News(image: "news3", date: "10.10.2020", title: "Дизайн в стиле культового iPhone 4, OLED и мощная SoC. Долгожданный iPhone"),
+        News(image: "news1", date: "10.10.2020", title: "Теперь Microsoft рассказала всё: полный официальный видеообзор Xbox Series.."),
+        News(image: "news2", date: "10.10.2020", title: "Представлен Oppo X 2021 — смартфон с растягивающимся экраном"),
+        News(image: "news3", date: "10.10.2020", title: "Дизайн в стиле культового iPhone 4, OLED и мощная SoC. Долгожданный iPhone"),
     ]
     var collectionView: UICollectionView!
     
@@ -65,7 +70,7 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource {
         case 1...3:
             return 10
         default:
-            return 0
+            return news.count
         }
     }
     
@@ -90,7 +95,7 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource {
                 withReuseIdentifier: String(describing: NewsCollectionViewCell.self),
                 for: indexPath
             ) as! NewsCollectionViewCell
-            
+            cell.configure(news: news[indexPath.item])
             return cell
         }
     }
