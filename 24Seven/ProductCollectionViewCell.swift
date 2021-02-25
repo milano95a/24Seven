@@ -9,6 +9,19 @@ import UIKit
 
 class ProductCollectionViewCell: UICollectionViewCell {
     
+    let containerStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.roundCorners()
+        stackView.clipsToBounds = true
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 0
+        stackView.backgroundColor = .white
+        return stackView
+    }()
+
     let imageContainer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -26,11 +39,10 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }()
     
     let discountLabel: CustomLabel = {
-        let label = CustomLabel(fontSize: 12)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "-20%"
+        let label = CustomLabel(fontSize: 12, textColor: .white)
         label.backgroundColor = .orange
-        label.textColor = .white
+        label.bottomInset = 4
+        label.text = "-20%"
         return label
     }()
 
@@ -86,20 +98,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         imageView.shadow()
         return imageView
     }()
-    
-    let containerStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.roundCorners()
-        stackView.clipsToBounds = true
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.spacing = 0
-        stackView.backgroundColor = .white
-        return stackView
-    }()
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -143,9 +142,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        discountLabel.round(corners: [.topLeft, .bottomRight], radius: 8)
+        discountLabel.roundCorners(radius: 8, corners: [.topLeft, .bottomRight])
         cartImageView.roundCorners(radius: cartImageView.frame.height / 2)
-        cartImageView.shadow()
     }
     
     required init?(coder: NSCoder) {

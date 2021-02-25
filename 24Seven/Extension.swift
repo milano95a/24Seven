@@ -38,8 +38,23 @@ extension NSCollectionLayoutSection {
 }
 
 extension UIView {
-    func roundCorners(radius: CGFloat = 8) {
-        self.layer.cornerRadius = radius
+    func roundCorners(radius: CGFloat = 8, corners: UIRectCorner = []) {
+        if corners.isEmpty {
+            self.layer.cornerRadius = radius
+
+        } else {
+            let size = CGSize(width: radius, height: radius)
+            
+            let path = UIBezierPath(
+                roundedRect: self.bounds,
+                byRoundingCorners: corners,
+                cornerRadii: size)
+            
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            
+            self.layer.mask = mask
+        }
     }
     
     func shadow() {
@@ -49,6 +64,7 @@ extension UIView {
         self.layer.shadowOpacity = 0.2
     }
 }
+
 
 extension UIColor {
     static var orange : UIColor {
@@ -105,23 +121,6 @@ class CustomLabel: UILabel {
             // ensures this works within stack views if multi-line
             preferredMaxLayoutWidth = bounds.width - (leftInset + rightInset)
         }
-    }
-}
-
-extension UIView {
-    func round(corners: UIRectCorner, radius: CGFloat) {
-        
-        let size = CGSize(width: radius, height: radius)
-        
-        let path = UIBezierPath(
-            roundedRect: self.bounds,
-            byRoundingCorners: corners,
-            cornerRadii: size)
-        
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        
-        self.layer.mask = mask
     }
 }
 
