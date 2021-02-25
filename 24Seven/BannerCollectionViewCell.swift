@@ -10,12 +10,7 @@ import UIKit
 class BannerCollectionViewCell: UICollectionViewCell {
     
     let bannerImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "BannerPlaceholder")
-        
+        let imageView = UIImageView(img: .banner, contentMode: .scaleAspectFill)        
         return imageView
     }()
     
@@ -24,6 +19,7 @@ class BannerCollectionViewCell: UICollectionViewCell {
         
         contentView.addSubview(bannerImageView)
         contentView.roundCorners()
+        contentView.clipsToBounds = true
         
         NSLayoutConstraint.activate([
             bannerImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

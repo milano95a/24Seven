@@ -8,15 +8,15 @@
 import UIKit
 
 class SectionHeaderCollectionReusableView: UICollectionReusableView {
+    
     let label: CustomLabel = {
-        let label = CustomLabel(fontSize: 16)
-        label.text = "Популярные товары"
+        let label = CustomLabel(fontSize: 16, textColor: .black, weight: .semibold)
+        label.leadingInset = 0
         return label
     }()
     
     let more: CustomLabel = {
         let label = CustomLabel(fontSize: 12)
-        label.text = "Посмотреть все"
         return label
     }()
     
@@ -34,7 +34,7 @@ class SectionHeaderCollectionReusableView: UICollectionReusableView {
     
     func configure(header: Header) {
         label.text = header.label
-        more.text = header.label
+        more.text = header.more
     }
     
     required init?(coder: NSCoder) {
