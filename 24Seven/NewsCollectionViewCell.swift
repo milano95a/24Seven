@@ -8,6 +8,7 @@
 import UIKit
 
 class NewsCollectionViewCell: UICollectionViewCell {
+    
     let newsImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false

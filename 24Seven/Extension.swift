@@ -89,6 +89,18 @@ extension UIImage {
     static var comment: UIImage {
         return UIImage(named: "Comment")!
     }
+    
+    static var news: UIImage {
+        return UIImage(named: "NewsPlaceholder")!
+    }
+    
+    static var product: UIImage {
+        return UIImage(named: "ProductPlaceholder")!
+    }
+    
+    static var dheart: UIImage {
+        return UIImage(named: "DHeart")!
+    }
 }
 
 class CustomLabel: UILabel {
@@ -143,5 +155,30 @@ extension NSMutableAttributedString {
         attributeString.append(NSAttributedString(string: text))
         
         return attributeString
+    }
+}
+
+extension UIStackView {
+    convenience init(backgroundColor: UIColor) {
+        self.init()
+        self.roundCorners()
+        self.clipsToBounds = true
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.axis = .vertical
+        self.alignment = .fill
+        self.distribution = .fill
+        self.spacing = 0
+        self.backgroundColor = .white
+    }
+}
+
+extension UIImageView {
+    convenience init(img: UIImage, contentMode: UIView.ContentMode = .scaleToFill, backgroundColor : UIColor = .white) {
+        self.init()
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.clipsToBounds = true
+        self.image = img
+        self.contentMode = contentMode
+        self.backgroundColor = backgroundColor
     }
 }

@@ -7,18 +7,11 @@
 
 import UIKit
 
+
 class ProductCollectionViewCell: UICollectionViewCell {
     
     let containerStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.roundCorners()
-        stackView.clipsToBounds = true
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.spacing = 0
-        stackView.backgroundColor = .white
+        let stackView = UIStackView(backgroundColor: .white)
         return stackView
     }()
 
@@ -30,11 +23,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }()
 
     let productImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "ProductPlaceholder")
+        let imageView = UIImageView(img: .product)
         return imageView
     }()
     
@@ -47,9 +36,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }()
 
     let heartImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "DHeart")
+        let imageView = UIImageView(img: .dheart)
         return imageView
     }()
     
@@ -89,11 +76,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }()
         
     let cartImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = .cart
-        imageView.backgroundColor = .black
-        imageView.contentMode = .center
+        let imageView = UIImageView(img: .cart, contentMode: .center, backgroundColor: .black)
         imageView.roundCorners(radius: 16)
         imageView.shadow()
         return imageView
@@ -110,7 +93,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         cartImageView.widthAnchor.constraint(equalToConstant: 36).isActive = true
         cartImageView.heightAnchor.constraint(equalToConstant: 36).isActive = true
         cartImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
-        cartImageView.centerYAnchor.constraint(equalTo: contentView.topAnchor, constant: 160).isActive = true
+        cartImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: contentView.frame.height / 2).isActive = true
 
         containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
