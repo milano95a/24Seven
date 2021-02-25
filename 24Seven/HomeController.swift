@@ -9,6 +9,9 @@ import UIKit
 
 class HomeController: UIViewController {
     
+    var news: [News] = [
+        News()
+    ]
     var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -56,7 +59,14 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource {
         return 5
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        switch section {
+        case 0:
+            return 10
+        case 1...3:
+            return 10
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

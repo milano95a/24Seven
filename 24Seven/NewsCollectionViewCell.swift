@@ -63,11 +63,23 @@ class NewsCollectionViewCell: UICollectionViewCell {
         newsImageView.bottomAnchor.constraint(equalTo: imageContainer.bottomAnchor).isActive = true
     }
     
-    func configure() {
-        
+    func configure(news: News) {
+        if let url = URL(string: news.url) {
+            if let data = try? Data(contentsOf: url){
+                newsImageView.image = UIImage(data: data)
+            }
+        }
+        dateLabel.text = news.date
+        titleLabel.text = news.title
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+struct News {
+    let url = ""
+    let date = "10.10.2020"
+    let title = "Теперь Microsoft рассказала всё: полный официальный видеообзор Xbox Series.."
 }
