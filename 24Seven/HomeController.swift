@@ -22,6 +22,10 @@ class HomeController: UIViewController {
         collectionView.register(
             UICollectionViewCell.self,
             forCellWithReuseIdentifier: String(describing: UICollectionViewCell.self))
+        collectionView.register(
+            BannerCollectionViewCell.self,
+            forCellWithReuseIdentifier: String(describing: BannerCollectionViewCell.self))
+
         collectionView.backgroundColor = .white
         
         view.addSubview(collectionView)
@@ -53,14 +57,22 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: String(describing: UICollectionViewCell.self),
-            for: indexPath
-        )
-        
-        cell.backgroundColor = .red
-        return cell
+        switch indexPath.section {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: String(describing: BannerCollectionViewCell.self),
+                for: indexPath
+            ) as! BannerCollectionViewCell
+            
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: String(describing: UICollectionViewCell.self),
+                for: indexPath
+            )
+            cell.backgroundColor = .red
+            return cell
+        }
     }
 }
 

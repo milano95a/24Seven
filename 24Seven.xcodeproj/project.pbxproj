@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		709B7F8825E6D02B00483608 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B7F8725E6D02B00483608 /* Extension.swift */; };
+		709B7F8B25E6D44600483608 /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B7F8A25E6D44600483608 /* BannerCollectionViewCell.swift */; };
 		70DE6CF425E6B5A8007B11F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DE6CF325E6B5A8007B11F3 /* AppDelegate.swift */; };
 		70DE6CF625E6B5A8007B11F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DE6CF525E6B5A8007B11F3 /* SceneDelegate.swift */; };
 		70DE6CF825E6B5A8007B11F3 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DE6CF725E6B5A8007B11F3 /* HomeController.swift */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		709B7F8725E6D02B00483608 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		709B7F8A25E6D44600483608 /* BannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCollectionViewCell.swift; sourceTree = "<group>"; };
 		70DE6CF025E6B5A8007B11F3 /* 24Seven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 24Seven.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70DE6CF325E6B5A8007B11F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70DE6CF525E6B5A8007B11F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				70DE6CF725E6B5A8007B11F3 /* HomeController.swift */,
+				709B7F8A25E6D44600483608 /* BannerCollectionViewCell.swift */,
 				709B7F8725E6D02B00483608 /* Extension.swift */,
 				70DE6D0825E6B604007B11F3 /* Supporting Files */,
 				70DE6D0125E6B5AC007B11F3 /* Info.plist */,
@@ -147,6 +150,7 @@
 				70DE6CF825E6B5A8007B11F3 /* HomeController.swift in Sources */,
 				70DE6CF425E6B5A8007B11F3 /* AppDelegate.swift in Sources */,
 				70DE6CF625E6B5A8007B11F3 /* SceneDelegate.swift in Sources */,
+				709B7F8B25E6D44600483608 /* BannerCollectionViewCell.swift in Sources */,
 				709B7F8825E6D02B00483608 /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
