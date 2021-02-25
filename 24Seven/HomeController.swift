@@ -29,21 +29,24 @@ class HomeController: UIViewController {
         Product(image: "product2", discount: 0, isFavourite: true, numberOfcomments: 15, name: "Груша Abate", price: 20490, isNew: true, isPopular: false),
         Product(image: "product3", discount: 20, isFavourite: false, numberOfcomments: 15, name: "Яблоко Бойка", price: 8990, isNew: true, isPopular: false),
         Product(image: "product4", discount: 0, isFavourite: true, numberOfcomments: 15, name: "Груша Abate", price: 20490, isNew: true, isPopular: false),
-        
         Product(image: "product4", discount: 20, isFavourite: true, numberOfcomments: 15, name: "Яблоко Бойка", price: 8990, isNew: false, isPopular: true),
         Product(image: "product3", discount: 0, isFavourite: false, numberOfcomments: 15, name: "Груша Abate", price: 20490, isNew: false, isPopular: true),
         Product(image: "product2", discount: 20, isFavourite: true, numberOfcomments: 15, name: "Яблоко Бойка", price: 8990, isNew: false, isPopular: true),
         Product(image: "product1", discount: 0, isFavourite: false, numberOfcomments: 15, name: "Груша Abate", price: 20490, isNew: false, isPopular: true),
     ]
     
+    let newHeader = Header(label: "Новые товары", more: "Посмотреть все")
+    let popularHeader = Header(label: "Популярные товары", more: "Посмотреть все")
+    let onDiscountHeader = Header(label: "Скидки", more: "Посмотреть все")
+    let newsHeader = Header(label: "Новости и акции", more: "Посмотреть все")
+    
     var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .background
         
-        //        configure collection view
-        collectionView = UICollectionView(frame: view.frame,
-                                          collectionViewLayout: configureLayout())
+        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: configureLayout())
         collectionView.delegate = self
         collectionView.dataSource = self
 
@@ -56,18 +59,19 @@ class HomeController: UIViewController {
         collectionView.register(
             NewsCollectionViewCell.self,
             forCellWithReuseIdentifier: String(describing: NewsCollectionViewCell.self))
-        collectionView.backgroundColor = UIColor(named: "Background")
+        collectionView.register(SectionHeaderCollectionReusableView.self, forSupplementaryViewOfKind: String(describing: SectionHeaderCollectionReusableView.self), withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self))
         
+        collectionView.backgroundColor = .clear
         view.addSubview(collectionView)
     }
     
     private func configureLayout() -> UICollectionViewCompositionalLayout {
         
-        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvronment in
+        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvronment in
             switch sectionIndex {
-            case 0:
+            case self?.banner:
                 return NSCollectionLayoutSection.banner()
-            case 1...4:
+            case self?.new, self?.popular, self?.onDiscount, self?.news:
                 return NSCollectionLayoutSection.item()
             default:
                 return nil
@@ -138,6 +142,33 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource {
             return cell
         default:
             return UICollectionViewCell()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch indexPath.section {
+        case new:
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self), for: indexPath) as! SectionHeaderCollectionReusableView
+            
+            header.configure(header: newHeader)
+            return header
+        case popular:
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self), for: indexPath) as! SectionHeaderCollectionReusableView
+            
+            header.configure(header: popularHeader)
+            return header
+        case onDiscount:
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self), for: indexPath) as! SectionHeaderCollectionReusableView
+            
+            header.configure(header: onDiscountHeader)
+            return header
+        case news:
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self), for: indexPath) as! SectionHeaderCollectionReusableView
+            
+            header.configure(header: newsHeader)
+            return header
+        default:
+            return UICollectionReusableView()
         }
     }
 }

@@ -33,6 +33,19 @@ extension NSCollectionLayoutSection {
                                                        subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
+        
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .absolute(50)
+            ),
+            elementKind: String(describing: SectionHeaderCollectionReusableView.self),
+            alignment: .topLeading
+        )
+        
+        section.boundarySupplementaryItems = [
+            header
+        ]
         return section
     }
 }
@@ -77,6 +90,10 @@ extension UIColor {
     
     static var gray: UIColor {
         return UIColor(named: "grey")!
+    }
+    
+    static var background: UIColor {
+        return UIColor(named: "background")!
     }
 }
 
