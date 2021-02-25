@@ -123,8 +123,35 @@ class ProductCollectionViewCell: UICollectionViewCell {
         discountLabel.roundCorners(radius: 8, corners: [.topLeft, .bottomRight])
         cartImageView.roundCorners(radius: cartImageView.frame.height / 2)
     }
+        
+    func configure(with product: Product) {
+        productImageView.image = UIImage(named: product.image)
+        discountLabel.text = "-\(product.discount)%"
+        discountLabel.isHidden = product.discount == 0
+        let heartImage = product.isFavourite ? "Heart" : "DHeart"
+        heartImageView.image = UIImage(named: heartImage)
+        let commentText = "Oтзыв (\(product.numberOfcomments))"
+        commentLabel.attributedText = NSMutableAttributedString.textStartWith(image: .comment, text: commentText)
+        productNameLabel.text = product.name
+        let attributedText = product.discount == 0 ? NSMutableAttributedString(string: " ") : NSMutableAttributedString.strikeThroughText(with: "\(product.price) сум")
+        oldPriceLabel.attributedText = attributedText
+        let newPrice = product.price * (100 - product.discount)/100
+        currentPriceLabel.text = "\(newPrice) сум за кг"
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+struct Product {
+    var image = ""
+    var discount = 0
+    var isFavourite = false
+    var numberOfcomments = 0
+    var name = ""
+    var price = 0
+    var isNew = false
+    var isPopular = false
+}
+
