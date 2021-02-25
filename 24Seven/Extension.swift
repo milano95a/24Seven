@@ -173,7 +173,7 @@ extension UIStackView {
 }
 
 extension UIImageView {
-    convenience init(img: UIImage, contentMode: UIView.ContentMode = .scaleToFill, backgroundColor : UIColor = .white) {
+    convenience init(img: UIImage, contentMode: UIView.ContentMode = .scaleAspectFill, backgroundColor : UIColor = .white) {
         self.init()
         self.translatesAutoresizingMaskIntoConstraints = false
         self.clipsToBounds = true

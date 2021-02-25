@@ -18,7 +18,6 @@ class ProductCollectionViewCell: UICollectionViewCell {
     let imageContainer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .blue
         return view
     }()
 
@@ -60,10 +59,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }()
     
     let oldPriceLabel: CustomLabel = {
-        
         let label = CustomLabel(fontSize: 12, textColor: .orange)
         label.attributedText = NSMutableAttributedString.strikeThroughText(with: "8 990 сум")
-        
         return label
     }()
     
@@ -90,16 +87,10 @@ class ProductCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(containerStackView)
         contentView.addSubview(cartImageView)
         
-        cartImageView.widthAnchor.constraint(equalToConstant: 36).isActive = true
-        cartImageView.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        cartImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
-        cartImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: contentView.frame.height / 2).isActive = true
-
         containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        
         containerStackView.addArrangedSubview(imageContainer)
         containerStackView.addArrangedSubview(commentLabel)
         containerStackView.addArrangedSubview(categoryLabel)
@@ -107,15 +98,19 @@ class ProductCollectionViewCell: UICollectionViewCell {
         containerStackView.addArrangedSubview(oldPriceLabel)
         containerStackView.addArrangedSubview(currentPriceLabel)
 
+        cartImageView.widthAnchor.constraint(equalToConstant: 36).isActive = true
+        cartImageView.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        cartImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
+        cartImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: contentView.frame.height / 2).isActive = true
+
         imageContainer.addSubview(productImageView)
-        
+        imageContainer.addSubview(discountLabel)
+        imageContainer.addSubview(heartImageView)
+
         productImageView.leadingAnchor.constraint(equalTo: imageContainer.leadingAnchor).isActive = true
         productImageView.trailingAnchor.constraint(equalTo: imageContainer.trailingAnchor).isActive = true
         productImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor).isActive = true
         productImageView.bottomAnchor.constraint(equalTo: imageContainer.bottomAnchor).isActive = true
-        
-        imageContainer.addSubview(discountLabel)
-        imageContainer.addSubview(heartImageView)
         
         discountLabel.leadingAnchor.constraint(equalTo: imageContainer.leadingAnchor).isActive = true
         discountLabel.topAnchor.constraint(equalTo: imageContainer.topAnchor).isActive = true
