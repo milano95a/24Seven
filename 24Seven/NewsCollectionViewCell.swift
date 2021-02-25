@@ -11,6 +11,7 @@ class NewsCollectionViewCell: UICollectionViewCell {
     
     let containerStackView: UIStackView = {
         let stackView = UIStackView(backgroundColor: .white)
+        stackView.roundCorners()
         return stackView
     }()
     

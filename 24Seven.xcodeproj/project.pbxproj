@@ -29,7 +29,7 @@
 		70D1238D25E83EBF00804107 /* SectionHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		70D1239225E84ECD00804107 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		70D1239525E84ED700804107 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
-		70DE6CF025E6B5A8007B11F3 /* 24Seven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 24Seven.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		70DE6CF025E6B5A8007B11F3 /* 24Seven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = 24Seven.app; path = "/Users/abu/Developer/24Seven/build/Debug-iphoneos/24Seven.app"; sourceTree = "<absolute>"; };
 		70DE6CF325E6B5A8007B11F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70DE6CF525E6B5A8007B11F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		70DE6CF725E6B5A8007B11F3 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -60,6 +60,15 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		70D1239825E8511D00804107 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				70D1239225E84ECD00804107 /* Product.swift */,
+				70D1239525E84ED700804107 /* News.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		70DE6CE725E6B5A8007B11F3 = {
 			isa = PBXGroup;
 			children = (
@@ -71,7 +80,6 @@
 		70DE6CF125E6B5A8007B11F3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				70DE6CF025E6B5A8007B11F3 /* 24Seven.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,11 +88,10 @@
 			isa = PBXGroup;
 			children = (
 				70DE6CF725E6B5A8007B11F3 /* HomeController.swift */,
-				70D1239225E84ECD00804107 /* Product.swift */,
-				70D1239525E84ED700804107 /* News.swift */,
+				70D1239825E8511D00804107 /* Models */,
 				70D1239025E84BEE00804107 /* Cells */,
-				709B7F8725E6D02B00483608 /* Extension.swift */,
 				70DE6D0825E6B604007B11F3 /* Supporting Files */,
+				709B7F8725E6D02B00483608 /* Extension.swift */,
 				70DE6D0125E6B5AC007B11F3 /* Info.plist */,
 			);
 			path = 24Seven;

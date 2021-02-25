@@ -14,21 +14,26 @@ class HomeController: UIViewController {
     let popular = 2
     let onDiscount = 3
     let news = 4
-    
-    var productsSource = Product.productsSource
-    var newsSource = News.newsSource
-    
+        
     let newHeader = Header(label: "Новые товары", more: "Посмотреть все")
     let popularHeader = Header(label: "Популярные товары", more: "Посмотреть все")
     let onDiscountHeader = Header(label: "Скидки", more: "Посмотреть все")
     let newsHeader = Header(label: "Новости и акции", more: "Посмотреть все")
     
+    var productsSource = Product.productsSource
+    var newsSource = News.newsSource
+
     var collectionView: UICollectionView!
+    var VStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
         
+        VStackView = UIStackView()
+        
+//        view.addSubview(VStackView)
+
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: configureLayout())
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -45,7 +50,10 @@ class HomeController: UIViewController {
         collectionView.register(SectionHeaderCollectionReusableView.self, forSupplementaryViewOfKind: String(describing: SectionHeaderCollectionReusableView.self), withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self))
         
         collectionView.backgroundColor = .clear
+        
+//        VStackView.addArrangedSubview(collectionView)
         view.addSubview(collectionView)
+
     }
     
     private func configureLayout() -> UICollectionViewCompositionalLayout {
@@ -155,5 +163,3 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource {
         }
     }
 }
-
-

@@ -191,14 +191,13 @@ extension NSMutableAttributedString {
 extension UIStackView {
     convenience init(backgroundColor: UIColor) {
         self.init()
-        self.roundCorners()
         self.clipsToBounds = true
         self.translatesAutoresizingMaskIntoConstraints = false
         self.axis = .vertical
         self.alignment = .fill
         self.distribution = .fill
         self.spacing = 0
-        self.backgroundColor = .white
+        self.backgroundColor = backgroundColor
     }
 }
 
