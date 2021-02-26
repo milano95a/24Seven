@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomSearchBar: UIStackView {
+class CustomSearchBar: UIStackView, UITextFieldDelegate {
 
     var SEARCHBAR_HEIGHT : CGFloat = 64
     var SEARCHBAR_BUTTON_HEIGHT: CGFloat = 48
@@ -79,6 +79,7 @@ class CustomSearchBar: UIStackView {
         searchButton.widthAnchor.constraint(equalToConstant: SEARCHBAR_BUTTON_HEIGHT).isActive = true
         
         searchTextField = UITextField()
+        searchTextField.delegate = self
         searchTextField.attributedPlaceholder = NSAttributedString(string: "Поиск", attributes: [NSAttributedString.Key.foregroundColor: UIColor.orange])
         
         searchContainer.addArrangedSubview(searchTextField)
@@ -89,6 +90,10 @@ class CustomSearchBar: UIStackView {
         voiceSearchButton.widthAnchor.constraint(equalToConstant: SEARCHBAR_BUTTON_HEIGHT).isActive = true
         
         return searchContainer
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
     }
 }
 
