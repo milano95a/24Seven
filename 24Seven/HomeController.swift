@@ -67,43 +67,15 @@ class HomeController: UIViewController {
         let logo = UIImageView(img: .logo, contentMode: .center, backgroundColor: .clear)
         vStackView.addArrangedSubview(logo)
         
-        makeNavBar()
-        
-        setupCollectionView()
-        vStackView.addArrangedSubview(collectionView)
-        
-    }
-    
-    private func makeNavBar() {
-        let hStack = CustomSearchBar(items: [
+        let searchBar = CustomSearchBar(items: [
             SearchBarItem(image: .barcode, onTap: nil),
             SearchBarItem(image: .heart, onTap: nil),
         ])
-        vStackView.addArrangedSubview(hStack)
-    }
-    
-    private func makeSearchControl() -> UIStackView {
-        let searchHStack = UIStackView(backgroundColor: .white, axis: .horizontal)
-        searchHStack.clipsToBounds = false
-        searchHStack.roundCorners(radius: 24)
-        searchHStack.shadow()
+        vStackView.addArrangedSubview(searchBar)
+
+        setupCollectionView()
+        vStackView.addArrangedSubview(collectionView)
         
-        searchButton = UIImageView(img: .search, contentMode: .center, backgroundColor: .clear)
-        searchHStack.addArrangedSubview(searchButton)
-        searchButton.roundCorners(radius: 24)
-        searchButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
-        
-        searchTextField = UITextField()
-        searchTextField.attributedPlaceholder = NSAttributedString(string: "Поиск", attributes: [NSAttributedString.Key.foregroundColor: UIColor.orange])
-        
-        searchHStack.addArrangedSubview(searchTextField)
-        
-        voiceSearchButton = UIImageView(img: .voice, contentMode: .center, backgroundColor: .clear)
-        searchHStack.addArrangedSubview(voiceSearchButton)
-        voiceSearchButton.roundCorners(radius: 24)
-        voiceSearchButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
-        
-        return searchHStack
     }
     
     private func setupCollectionView() {

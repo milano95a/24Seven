@@ -9,6 +9,10 @@ import UIKit
 
 class CustomSearchBar: UIStackView {
 
+    var SEARCHBAR_HEIGHT : CGFloat = 64
+    var SEARCHBAR_BUTTON_HEIGHT: CGFloat = 48
+    var DEFAULT_SPACING : CGFloat = 8
+    
     var searchButton: UIImageView!
     var searchTextField: UITextField!
     var voiceSearchButton: UIImageView!
@@ -24,87 +28,67 @@ class CustomSearchBar: UIStackView {
     convenience init(items: [SearchBarItem]) {
         self.init()
         
-//        let hStack = UIStackView(backgroundColor: .clear, axis: .horizontal)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.axis = .horizontal
         self.distribution = .fill
         self.alignment = .center
         self.clipsToBounds = true
-        self.spacing = 8
+        self.spacing = DEFAULT_SPACING
         self.backgroundColor = .clear
-        self.heightAnchor.constraint(equalToConstant: 64).isActive = true
+        self.heightAnchor.constraint(equalToConstant: SEARCHBAR_HEIGHT).isActive = true
         
         let leadingSpacer = UIView()
         self.addArrangedSubview(leadingSpacer)
         leadingSpacer.translatesAutoresizingMaskIntoConstraints = false
-        leadingSpacer.widthAnchor.constraint(equalToConstant: 8).isActive = true
+        leadingSpacer.widthAnchor.constraint(equalToConstant: DEFAULT_SPACING).isActive = true
         
         let searchControlContainer = makeSearchControl()
         self.addArrangedSubview(searchControlContainer)
-        searchControlContainer.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        searchControlContainer.heightAnchor.constraint(equalToConstant: SEARCHBAR_BUTTON_HEIGHT).isActive = true
         
         for item in items {
             let x = UIImageView(img: item.image, contentMode: .center, backgroundColor: .white)
             self.addArrangedSubview(x)
             x.clipsToBounds = false
-            x.widthAnchor.constraint(equalToConstant: 48).isActive = true
-            x.heightAnchor.constraint(equalToConstant: 48).isActive = true
+            x.widthAnchor.constraint(equalToConstant: SEARCHBAR_BUTTON_HEIGHT).isActive = true
+            x.heightAnchor.constraint(equalToConstant: SEARCHBAR_BUTTON_HEIGHT).isActive = true
             x.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
             x.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-            x.roundCorners(radius: 24)
+            x.roundCorners(radius: SEARCHBAR_BUTTON_HEIGHT / 2)
             x.shadow()
             if let onTap = item.onTap {
                 x.addGestureRecognizer(onTap)
             }
         }
-//        barcodeButton = UIImageView(img: .barcode, contentMode: .center, backgroundColor: .white)
-//        hStack.addArrangedSubview(barcodeButton)
-//        barcodeButton.clipsToBounds = false
-//        barcodeButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
-//        barcodeButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
-//        barcodeButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-//        barcodeButton.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-//        barcodeButton.roundCorners(radius: 24)
-//        barcodeButton.shadow()
-        
-//        favouriteButton = UIImageView(img: .heart, contentMode: .center, backgroundColor: .white)
-//        hStack.addArrangedSubview(favouriteButton)
-//        favouriteButton.clipsToBounds = false
-//        favouriteButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
-//        favouriteButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
-//        favouriteButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-//        favouriteButton.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-//        favouriteButton.roundCorners(radius: 24)
-//        favouriteButton.shadow()
         
         let trailingSpacer = UIView()
         self.addArrangedSubview(trailingSpacer)
         trailingSpacer.translatesAutoresizingMaskIntoConstraints = false
-        trailingSpacer.widthAnchor.constraint(equalToConstant: 8).isActive = true
+        trailingSpacer.widthAnchor.constraint(equalToConstant: DEFAULT_SPACING).isActive = true
     }
     
     private func makeSearchControl() -> UIStackView {
-        let searchHStack = UIStackView(backgroundColor: .white, axis: .horizontal)
-        searchHStack.clipsToBounds = false
-        searchHStack.roundCorners(radius: 24)
-        searchHStack.shadow()
+        let searchContainer = UIStackView(backgroundColor: .white, axis: .horizontal)
+        searchContainer.clipsToBounds = false
+        searchContainer.roundCorners(radius: SEARCHBAR_BUTTON_HEIGHT / 2)
+        searchContainer.shadow()
         
         searchButton = UIImageView(img: .search, contentMode: .center, backgroundColor: .clear)
-        searchHStack.addArrangedSubview(searchButton)
-        searchButton.roundCorners(radius: 24)
-        searchButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
+        searchContainer.addArrangedSubview(searchButton)
+        searchButton.roundCorners(radius: SEARCHBAR_BUTTON_HEIGHT / 2)
+        searchButton.widthAnchor.constraint(equalToConstant: SEARCHBAR_BUTTON_HEIGHT).isActive = true
         
         searchTextField = UITextField()
         searchTextField.attributedPlaceholder = NSAttributedString(string: "Поиск", attributes: [NSAttributedString.Key.foregroundColor: UIColor.orange])
         
-        searchHStack.addArrangedSubview(searchTextField)
+        searchContainer.addArrangedSubview(searchTextField)
         
         voiceSearchButton = UIImageView(img: .voice, contentMode: .center, backgroundColor: .clear)
-        searchHStack.addArrangedSubview(voiceSearchButton)
-        voiceSearchButton.roundCorners(radius: 24)
-        voiceSearchButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
+        searchContainer.addArrangedSubview(voiceSearchButton)
+        voiceSearchButton.roundCorners(radius: SEARCHBAR_BUTTON_HEIGHT / 2)
+        voiceSearchButton.widthAnchor.constraint(equalToConstant: SEARCHBAR_BUTTON_HEIGHT).isActive = true
         
-        return searchHStack
+        return searchContainer
     }
 }
 
