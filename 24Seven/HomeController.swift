@@ -18,21 +18,15 @@ class HomeController: UIViewController {
     let onDiscount = 3
     let news = 4
     
-    let newHeader = Header(label: "Новые товары", more: "Посмотреть все")
-    let popularHeader = Header(label: "Популярные товары", more: "Посмотреть все")
-    let onDiscountHeader = Header(label: "Скидки", more: "Посмотреть все")
-    let newsHeader = Header(label: "Новости и акции", more: "Посмотреть все")
+    let newHeader = HeaderItem(label: "Новые товары", more: "Посмотреть все")
+    let popularHeader = HeaderItem(label: "Популярные товары", more: "Посмотреть все")
+    let onDiscountHeader = HeaderItem(label: "Скидки", more: "Посмотреть все")
+    let newsHeader = HeaderItem(label: "Новости и акции", more: "Посмотреть все")
     
     var productsSource = Product.productsSource
     var newsSource = News.newsSource
     
     var collectionView: UICollectionView!
-    
-    var searchButton: UIImageView!
-    var searchTextField: UITextField!
-    var voiceSearchButton: UIImageView!
-    var barcodeButton: UIImageView!
-    var favouriteButton: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,23 +50,6 @@ class HomeController: UIViewController {
         ])
         vContainer.addArrangedSubview(searchBar)
 
-        setupCollectionView()
-        vContainer.addArrangedSubview(collectionView)
-        
-        let toolbar = CustomToolBar()
-        toolbar.configure(items: [
-            CustomToolbarItem(image: .home, onTap: nil),
-            CustomToolbarItem(image: .category, onTap: nil),
-            CustomToolbarItem(image: .toolbarCart, onTap: nil),
-            CustomToolbarItem(image: .profile, onTap: nil)
-        ])
-        toolbar.translatesAutoresizingMaskIntoConstraints = false
-        toolbar.heightAnchor.constraint(equalToConstant: TOOLBAR_SIZE).isActive = true
-        
-        vContainer.addArrangedSubview(toolbar)
-    }
-    
-    private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: configureLayout())
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -87,8 +64,23 @@ class HomeController: UIViewController {
             NewsCollectionViewCell.self,
             forCellWithReuseIdentifier: String(describing: NewsCollectionViewCell.self))
         collectionView.register(SectionHeaderCollectionReusableView.self, forSupplementaryViewOfKind: String(describing: SectionHeaderCollectionReusableView.self), withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self))
-        
         collectionView.backgroundColor = .clear
+
+        vContainer.addArrangedSubview(collectionView)
+        
+        let toolbar = CustomToolBar()
+        toolbar.configure(items: [
+            CustomToolbarItem(image: .home, onTap: nil),
+            CustomToolbarItem(image: .category, onTap: nil),
+            CustomToolbarItem(image: .toolbarCart, onTap: nil),
+            CustomToolbarItem(image: .profile, onTap: nil)
+        ])
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        toolbar.heightAnchor.constraint(equalToConstant: TOOLBAR_SIZE).isActive = true
+        vContainer.addArrangedSubview(toolbar)
+    }
+    
+    private func setupCollectionView() {
     }
     
     private func configureLayout() -> UICollectionViewCompositionalLayout {
