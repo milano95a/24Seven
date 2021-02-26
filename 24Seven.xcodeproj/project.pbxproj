@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7009403725E912CA00C4938F /* BaseCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009403625E912CA00C4938F /* BaseCollectionViewLayout.swift */; };
+		7009403A25E9197B00C4938F /* CustomToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009403925E9197B00C4938F /* CustomToolBar.swift */; };
+		7009404025E925BD00C4938F /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009403F25E925BD00C4938F /* CustomLabel.swift */; };
 		709B7F8825E6D02B00483608 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B7F8725E6D02B00483608 /* Extension.swift */; };
 		709B7F8B25E6D44600483608 /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B7F8A25E6D44600483608 /* BannerCollectionViewCell.swift */; };
 		709B7F8F25E79BD200483608 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B7F8E25E79BD200483608 /* ProductCollectionViewCell.swift */; };
@@ -22,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7009403525E8DF5100C4938F /* 24Seven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 24Seven.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7009403625E912CA00C4938F /* BaseCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewLayout.swift; sourceTree = "<group>"; };
+		7009403925E9197B00C4938F /* CustomToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolBar.swift; sourceTree = "<group>"; };
+		7009403F25E925BD00C4938F /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		709B7F8725E6D02B00483608 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		709B7F8A25E6D44600483608 /* BannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCollectionViewCell.swift; sourceTree = "<group>"; };
 		709B7F8E25E79BD200483608 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -29,7 +36,6 @@
 		70D1238D25E83EBF00804107 /* SectionHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		70D1239225E84ECD00804107 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		70D1239525E84ED700804107 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
-		70DE6CF025E6B5A8007B11F3 /* 24Seven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = 24Seven.app; path = "/Users/abu/Developer/24Seven/build/Debug-iphoneos/24Seven.app"; sourceTree = "<absolute>"; };
 		70DE6CF325E6B5A8007B11F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70DE6CF525E6B5A8007B11F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		70DE6CF725E6B5A8007B11F3 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -49,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7009403E25E9256E00C4938F /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				7009403925E9197B00C4938F /* CustomToolBar.swift */,
+				7009403F25E925BD00C4938F /* CustomLabel.swift */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
 		70D1239025E84BEE00804107 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +95,7 @@
 		70DE6CF125E6B5A8007B11F3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				7009403525E8DF5100C4938F /* 24Seven.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,6 +104,8 @@
 			isa = PBXGroup;
 			children = (
 				70DE6CF725E6B5A8007B11F3 /* HomeController.swift */,
+				7009403625E912CA00C4938F /* BaseCollectionViewLayout.swift */,
+				7009403E25E9256E00C4938F /* Custom */,
 				70D1239825E8511D00804107 /* Models */,
 				70D1239025E84BEE00804107 /* Cells */,
 				70DE6D0825E6B604007B11F3 /* Supporting Files */,
@@ -125,7 +143,7 @@
 			);
 			name = 24Seven;
 			productName = 24Seven;
-			productReference = 70DE6CF025E6B5A8007B11F3 /* 24Seven.app */;
+			productReference = 7009403525E8DF5100C4938F /* 24Seven.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -181,9 +199,12 @@
 				709B7F9225E79C0500483608 /* NewsCollectionViewCell.swift in Sources */,
 				70D1239325E84ECD00804107 /* Product.swift in Sources */,
 				70DE6CF425E6B5A8007B11F3 /* AppDelegate.swift in Sources */,
+				7009403725E912CA00C4938F /* BaseCollectionViewLayout.swift in Sources */,
 				70DE6CF625E6B5A8007B11F3 /* SceneDelegate.swift in Sources */,
 				70D1238E25E83EBF00804107 /* SectionHeaderCollectionReusableView.swift in Sources */,
 				709B7F8B25E6D44600483608 /* BannerCollectionViewCell.swift in Sources */,
+				7009403A25E9197B00C4938F /* CustomToolBar.swift in Sources */,
+				7009404025E925BD00C4938F /* CustomLabel.swift in Sources */,
 				709B7F8F25E79BD200483608 /* ProductCollectionViewCell.swift in Sources */,
 				70D1239625E84ED700804107 /* News.swift in Sources */,
 				709B7F8825E6D02B00483608 /* Extension.swift in Sources */,

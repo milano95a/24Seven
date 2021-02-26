@@ -147,40 +147,24 @@ extension UIImage {
     static var voice: UIImage {
         return UIImage(named: "Mic")!
     }
+    
+    static var toolbarCart: UIImage {
+        return UIImage(named: "ToolbarCart")!
+    }
+    
+    static var home: UIImage {
+        return UIImage(named: "Home")!
+    }
+    
+    static var profile: UIImage {
+        return UIImage(named: "Profile")!
+    }
+    
+    static var category: UIImage {
+        return UIImage(named: "Category")!
+    }
 }
 
-class CustomLabel: UILabel {
-    
-    var topInset: CGFloat = 4
-    var bottomInset: CGFloat = 0
-    var leadingInset: CGFloat = 8
-    var trailingInset: CGFloat = 8
-    
-    convenience init(fontSize: CGFloat, textColor: UIColor = .gray, weight: UIFont.Weight = .regular) {
-        self.init()
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.font = UIFont.systemFont(ofSize: fontSize, weight: weight)
-        self.textColor = textColor
-    }
-    
-    override func drawText(in rect: CGRect) {
-        let insets = UIEdgeInsets(top: topInset, left: leadingInset, bottom: bottomInset, right: trailingInset)
-        super.drawText(in: rect.inset(by: insets))
-    }
-    
-    override var intrinsicContentSize: CGSize {
-        let size = super.intrinsicContentSize
-        return CGSize(width: size.width + leadingInset + trailingInset,
-                      height: size.height + topInset + bottomInset)
-    }
-    
-    override var bounds: CGRect {
-        didSet {
-            // ensures this works within stack views if multi-line
-            preferredMaxLayoutWidth = bounds.width - (leadingInset + trailingInset)
-        }
-    }
-}
 
 extension NSMutableAttributedString {
     static func strikeThroughText(with text: String) -> NSMutableAttributedString {

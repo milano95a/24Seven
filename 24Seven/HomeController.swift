@@ -8,6 +8,7 @@
 import UIKit
 
 let LOGO_SIZE: CGFloat = 48
+let TOOLBAR_SIZE: CGFloat = 80
 
 class HomeController: UIViewController {
     
@@ -47,6 +48,18 @@ class HomeController: UIViewController {
         vStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         vStackView.spacing = 4
         setUpContentLayout()
+        
+        let toolbar = CustomToolBar()
+        toolbar.configure(items: [
+            CustomToolbarItem(image: .home, onTap: nil),
+            CustomToolbarItem(image: .category, onTap: nil),
+            CustomToolbarItem(image: .toolbarCart, onTap: nil),
+            CustomToolbarItem(image: .profile, onTap: nil)
+        ])
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        toolbar.heightAnchor.constraint(equalToConstant: TOOLBAR_SIZE).isActive = true
+        
+        vStackView.addArrangedSubview(toolbar)
     }
     
     private func setUpContentLayout(){
