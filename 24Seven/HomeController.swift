@@ -47,6 +47,7 @@ class HomeController: CustomCollectionViewController {
         ])
         vContainer.addArrangedSubview(searchBar)
         
+        collectionView.showsVerticalScrollIndicator = false
         vContainer.addArrangedSubview(collectionView)
         
         let toolbar = CustomToolBar()

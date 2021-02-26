@@ -208,9 +208,3 @@ extension UIImageView {
         self.backgroundColor = backgroundColor
     }
 }
-
-extension UIView {
-    var statusBarHeight: CGFloat {
-        return self.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-    }
-}
