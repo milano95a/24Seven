@@ -17,7 +17,7 @@ class HomeController: UIViewController {
     let popular = 2
     let onDiscount = 3
     let news = 4
-        
+    
     let newHeader = Header(label: "Новые товары", more: "Посмотреть все")
     let popularHeader = Header(label: "Популярные товары", more: "Посмотреть все")
     let onDiscountHeader = Header(label: "Скидки", more: "Посмотреть все")
@@ -25,7 +25,7 @@ class HomeController: UIViewController {
     
     var productsSource = Product.productsSource
     var newsSource = News.newsSource
-
+    
     var vStackView: UIStackView!
     var collectionView: UICollectionView!
     
@@ -34,7 +34,7 @@ class HomeController: UIViewController {
     var voiceSearchButton: UIImageView!
     var barcodeButton: UIImageView!
     var favouriteButton: UIImageView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
@@ -64,70 +64,22 @@ class HomeController: UIViewController {
     
     private func setUpContentLayout(){
         
-        let logoContainer = UIView()
-        vStackView.addArrangedSubview(logoContainer)
-        logoContainer.translatesAutoresizingMaskIntoConstraints = false
-        logoContainer.heightAnchor.constraint(equalToConstant: LOGO_SIZE).isActive = true
-        
-        let logoHStack = UIStackView(backgroundColor: .clear, axis: .horizontal)
-        logoContainer.addSubview(logoHStack)
-        logoHStack.spacing = 8
-        logoHStack.centerXAnchor.constraint(equalTo: logoContainer.centerXAnchor).isActive = true
-        logoHStack.centerYAnchor.constraint(equalTo: logoContainer.centerYAnchor).isActive = true
-        
         let logo = UIImageView(img: .logo, contentMode: .center, backgroundColor: .clear)
-        logoHStack.addArrangedSubview(logo)
-        
-        let _24Seven = UIImageView(img: ._24Seven, contentMode: .center, backgroundColor: .clear)
-        logoHStack.addArrangedSubview(_24Seven)
+        vStackView.addArrangedSubview(logo)
         
         makeNavBar()
         
         setupCollectionView()
         vStackView.addArrangedSubview(collectionView)
-
+        
     }
     
     private func makeNavBar() {
-        let hStack = UIStackView(backgroundColor: .clear, axis: .horizontal)
+        let hStack = CustomSearchBar(items: [
+            SearchBarItem(image: .barcode, onTap: nil),
+            SearchBarItem(image: .heart, onTap: nil),
+        ])
         vStackView.addArrangedSubview(hStack)
-        hStack.heightAnchor.constraint(equalToConstant: 64).isActive = true
-        hStack.alignment = .center
-        hStack.spacing = 8
-        
-        let leadingSpacer = UIView()
-        hStack.addArrangedSubview(leadingSpacer)
-        leadingSpacer.translatesAutoresizingMaskIntoConstraints = false
-        leadingSpacer.widthAnchor.constraint(equalToConstant: 8).isActive = true
-        
-        let searchControlContainer = makeSearchControl()
-        hStack.addArrangedSubview(searchControlContainer)
-        searchControlContainer.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        
-        barcodeButton = UIImageView(img: .barcode, contentMode: .center, backgroundColor: .white)
-        hStack.addArrangedSubview(barcodeButton)
-        barcodeButton.clipsToBounds = false
-        barcodeButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
-        barcodeButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        barcodeButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-        barcodeButton.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-        barcodeButton.roundCorners(radius: 24)
-        barcodeButton.shadow()
-        
-        favouriteButton = UIImageView(img: .heart, contentMode: .center, backgroundColor: .white)
-        hStack.addArrangedSubview(favouriteButton)
-        favouriteButton.clipsToBounds = false
-        favouriteButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
-        favouriteButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        favouriteButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-        favouriteButton.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-        favouriteButton.roundCorners(radius: 24)
-        favouriteButton.shadow()
-        
-        let trailingSpacer = UIView()
-        hStack.addArrangedSubview(trailingSpacer)
-        trailingSpacer.translatesAutoresizingMaskIntoConstraints = false
-        trailingSpacer.widthAnchor.constraint(equalToConstant: 8).isActive = true
     }
     
     private func makeSearchControl() -> UIStackView {
@@ -140,7 +92,7 @@ class HomeController: UIViewController {
         searchHStack.addArrangedSubview(searchButton)
         searchButton.roundCorners(radius: 24)
         searchButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
-
+        
         searchTextField = UITextField()
         searchTextField.attributedPlaceholder = NSAttributedString(string: "Поиск", attributes: [NSAttributedString.Key.foregroundColor: UIColor.orange])
         
@@ -150,7 +102,7 @@ class HomeController: UIViewController {
         searchHStack.addArrangedSubview(voiceSearchButton)
         voiceSearchButton.roundCorners(radius: 24)
         voiceSearchButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
-
+        
         return searchHStack
     }
     
@@ -158,7 +110,7 @@ class HomeController: UIViewController {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: configureLayout())
         collectionView.delegate = self
         collectionView.dataSource = self
-
+        
         collectionView.register(
             BannerCollectionViewCell.self,
             forCellWithReuseIdentifier: String(describing: BannerCollectionViewCell.self))

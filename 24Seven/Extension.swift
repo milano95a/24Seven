@@ -128,10 +128,6 @@ extension UIImage {
         return UIImage(named: "BannerPlaceholder")!
     }
     
-    static var _24Seven: UIImage {
-        return UIImage(named: "24Seven")!
-    }
-    
     static var logo: UIImage {
         return UIImage(named: "Logo")!
     }
@@ -194,6 +190,7 @@ extension UIStackView {
         self.clipsToBounds = true
         self.translatesAutoresizingMaskIntoConstraints = false
         self.axis = axis
+        
         self.alignment = .fill
         self.distribution = .fill
         self.spacing = 0
