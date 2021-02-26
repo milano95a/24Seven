@@ -26,7 +26,6 @@ class HomeController: UIViewController {
     var productsSource = Product.productsSource
     var newsSource = News.newsSource
     
-    var vStackView: UIStackView!
     var collectionView: UICollectionView!
     
     var searchButton: UIImageView!
@@ -39,15 +38,26 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .background
         
-        vStackView = UIStackView(backgroundColor: .clear)
-        view.addSubview(vStackView)
+        let vContainer = UIStackView(backgroundColor: .clear)
+        view.addSubview(vContainer)
         
-        vStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        vStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        vStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        vStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        vStackView.spacing = 4
-        setUpContentLayout()
+        vContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        vContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        vContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        vContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        vContainer.spacing = 4
+        
+        let logo = UIImageView(img: .logo, contentMode: .center, backgroundColor: .clear)
+        vContainer.addArrangedSubview(logo)
+        
+        let searchBar = CustomSearchBar(items: [
+            SearchBarItem(image: .barcode, onTap: nil),
+            SearchBarItem(image: .heart, onTap: nil),
+        ])
+        vContainer.addArrangedSubview(searchBar)
+
+        setupCollectionView()
+        vContainer.addArrangedSubview(collectionView)
         
         let toolbar = CustomToolBar()
         toolbar.configure(items: [
@@ -59,23 +69,7 @@ class HomeController: UIViewController {
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         toolbar.heightAnchor.constraint(equalToConstant: TOOLBAR_SIZE).isActive = true
         
-        vStackView.addArrangedSubview(toolbar)
-    }
-    
-    private func setUpContentLayout(){
-        
-        let logo = UIImageView(img: .logo, contentMode: .center, backgroundColor: .clear)
-        vStackView.addArrangedSubview(logo)
-        
-        let searchBar = CustomSearchBar(items: [
-            SearchBarItem(image: .barcode, onTap: nil),
-            SearchBarItem(image: .heart, onTap: nil),
-        ])
-        vStackView.addArrangedSubview(searchBar)
-
-        setupCollectionView()
-        vStackView.addArrangedSubview(collectionView)
-        
+        vContainer.addArrangedSubview(toolbar)
     }
     
     private func setupCollectionView() {
