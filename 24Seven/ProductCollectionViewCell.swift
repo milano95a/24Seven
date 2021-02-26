@@ -24,6 +24,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
 
     let productImageView: UIImageView = {
         let imageView = UIImageView(img: .product)
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return imageView
     }()
     
@@ -75,8 +76,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         
     let cartImageView: UIImageView = {
         let imageView = UIImageView(img: .cart, contentMode: .center, backgroundColor: .black)
-        imageView.roundCorners(radius: 16)
-        imageView.shadow()
+        imageView.clipsToBounds = false
         return imageView
     }()
         
@@ -123,14 +123,14 @@ class ProductCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         discountLabel.roundCorners(radius: 8, corners: [.topLeft, .bottomRight])
         cartImageView.roundCorners(radius: cartImageView.frame.height / 2)
+        cartImageView.shadow()
     }
         
     func configure(with product: Product) {
         productImageView.image = UIImage(named: product.image)
         discountLabel.text = "-\(product.discount)%"
         discountLabel.isHidden = product.discount == 0
-        let heartImage = product.isFavourite ? "Heart" : "DHeart"
-        heartImageView.image = UIImage(named: heartImage)
+        heartImageView.image = product.isFavourite ? .heart : .dheart
         let commentText = "Oтзыв (\(product.numberOfcomments))"
         commentLabel.attributedText = NSMutableAttributedString.textStartWith(image: .comment, text: commentText)
         productNameLabel.text = product.name
@@ -138,6 +138,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
         oldPriceLabel.attributedText = attributedText
         let newPrice = product.price * (100 - product.discount)/100
         currentPriceLabel.text = "\(newPrice) сум за кг"
+        
+        setNeedsDisplay()
     }
     
     required init?(coder: NSCoder) {

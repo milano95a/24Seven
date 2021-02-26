@@ -7,6 +7,8 @@
 
 import UIKit
 
+let LOGO_SIZE: CGFloat = 48
+
 class HomeController: UIViewController {
     
     let banner = 0
@@ -23,9 +25,15 @@ class HomeController: UIViewController {
     var productsSource = Product.productsSource
     var newsSource = News.newsSource
 
-    var collectionView: UICollectionView!
     var vStackView: UIStackView!
+    var collectionView: UICollectionView!
     
+    var searchButton: UIImageView!
+    var searchTextField: UITextField!
+    var voiceSearchButton: UIImageView!
+    var barcodeButton: UIImageView!
+    var favouriteButton: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
@@ -37,7 +45,7 @@ class HomeController: UIViewController {
         vStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         vStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         vStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
+        vStackView.spacing = 4
         setUpContentLayout()
     }
     
@@ -46,23 +54,91 @@ class HomeController: UIViewController {
         let logoContainer = UIView()
         vStackView.addArrangedSubview(logoContainer)
         logoContainer.translatesAutoresizingMaskIntoConstraints = false
-        logoContainer.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        logoContainer.heightAnchor.constraint(equalToConstant: LOGO_SIZE).isActive = true
         
-        let hStackView = UIStackView(backgroundColor: .clear)
-        logoContainer.addSubview(hStackView)
-        hStackView.axis = .horizontal
-        hStackView.centerXAnchor.constraint(equalTo: logoContainer.centerXAnchor).isActive = true
-        hStackView.centerYAnchor.constraint(equalTo: logoContainer.centerYAnchor).isActive = true
+        let logoHStack = UIStackView(backgroundColor: .clear, axis: .horizontal)
+        logoContainer.addSubview(logoHStack)
+        logoHStack.spacing = 8
+        logoHStack.centerXAnchor.constraint(equalTo: logoContainer.centerXAnchor).isActive = true
+        logoHStack.centerYAnchor.constraint(equalTo: logoContainer.centerYAnchor).isActive = true
         
         let logo = UIImageView(img: .logo, contentMode: .center, backgroundColor: .clear)
-        hStackView.addArrangedSubview(logo)
+        logoHStack.addArrangedSubview(logo)
         
         let _24Seven = UIImageView(img: ._24Seven, contentMode: .center, backgroundColor: .clear)
-        hStackView.addArrangedSubview(_24Seven)
-
+        logoHStack.addArrangedSubview(_24Seven)
+        
+        makeNavBar()
+        
         setupCollectionView()
         vStackView.addArrangedSubview(collectionView)
 
+    }
+    
+    private func makeNavBar() {
+        let hStack = UIStackView(backgroundColor: .clear, axis: .horizontal)
+        vStackView.addArrangedSubview(hStack)
+        hStack.heightAnchor.constraint(equalToConstant: 64).isActive = true
+        hStack.alignment = .center
+        hStack.spacing = 8
+        
+        let leadingSpacer = UIView()
+        hStack.addArrangedSubview(leadingSpacer)
+        leadingSpacer.translatesAutoresizingMaskIntoConstraints = false
+        leadingSpacer.widthAnchor.constraint(equalToConstant: 8).isActive = true
+        
+        let searchControlContainer = makeSearchControl()
+        hStack.addArrangedSubview(searchControlContainer)
+        searchControlContainer.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        
+        barcodeButton = UIImageView(img: .barcode, contentMode: .center, backgroundColor: .white)
+        hStack.addArrangedSubview(barcodeButton)
+        barcodeButton.clipsToBounds = false
+        barcodeButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
+        barcodeButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        barcodeButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        barcodeButton.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        barcodeButton.roundCorners(radius: 24)
+        barcodeButton.shadow()
+        
+        favouriteButton = UIImageView(img: .heart, contentMode: .center, backgroundColor: .white)
+        hStack.addArrangedSubview(favouriteButton)
+        favouriteButton.clipsToBounds = false
+        favouriteButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
+        favouriteButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        favouriteButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        favouriteButton.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        favouriteButton.roundCorners(radius: 24)
+        favouriteButton.shadow()
+        
+        let trailingSpacer = UIView()
+        hStack.addArrangedSubview(trailingSpacer)
+        trailingSpacer.translatesAutoresizingMaskIntoConstraints = false
+        trailingSpacer.widthAnchor.constraint(equalToConstant: 8).isActive = true
+    }
+    
+    private func makeSearchControl() -> UIStackView {
+        let searchHStack = UIStackView(backgroundColor: .white, axis: .horizontal)
+        searchHStack.clipsToBounds = false
+        searchHStack.roundCorners(radius: 24)
+        searchHStack.shadow()
+        
+        searchButton = UIImageView(img: .search, contentMode: .center, backgroundColor: .clear)
+        searchHStack.addArrangedSubview(searchButton)
+        searchButton.roundCorners(radius: 24)
+        searchButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
+
+        searchTextField = UITextField()
+        searchTextField.attributedPlaceholder = NSAttributedString(string: "Поиск", attributes: [NSAttributedString.Key.foregroundColor: UIColor.orange])
+        
+        searchHStack.addArrangedSubview(searchTextField)
+        
+        voiceSearchButton = UIImageView(img: .voice, contentMode: .center, backgroundColor: .clear)
+        searchHStack.addArrangedSubview(voiceSearchButton)
+        voiceSearchButton.roundCorners(radius: 24)
+        voiceSearchButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
+
+        return searchHStack
     }
     
     private func setupCollectionView() {

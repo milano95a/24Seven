@@ -72,9 +72,9 @@ extension UIView {
     }
     
     func shadow() {
-        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowColor = UIColor.gray.cgColor
         self.layer.shadowOffset = .zero
-        self.layer.shadowRadius = 8
+        self.layer.shadowRadius = 4
         self.layer.shadowOpacity = 0.2
     }
 }
@@ -120,6 +120,10 @@ extension UIImage {
         return UIImage(named: "DHeart")!
     }
     
+    static var heart: UIImage {
+        return UIImage(named: "Heart")!
+    }
+
     static var banner: UIImage {
         return UIImage(named: "BannerPlaceholder")!
     }
@@ -130,6 +134,18 @@ extension UIImage {
     
     static var logo: UIImage {
         return UIImage(named: "Logo")!
+    }
+    
+    static var search: UIImage {
+        return UIImage(named: "Search")!
+    }
+    
+    static var barcode: UIImage {
+        return UIImage(named: "Barcode")!
+    }
+    
+    static var voice: UIImage {
+        return UIImage(named: "Mic")!
     }
 }
 
@@ -189,11 +205,11 @@ extension NSMutableAttributedString {
 }
 
 extension UIStackView {
-    convenience init(backgroundColor: UIColor) {
+    convenience init(backgroundColor: UIColor, axis: NSLayoutConstraint.Axis = .vertical) {
         self.init()
         self.clipsToBounds = true
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.axis = .vertical
+        self.axis = axis
         self.alignment = .fill
         self.distribution = .fill
         self.spacing = 0
