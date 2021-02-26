@@ -7,7 +7,6 @@
 
 import UIKit
 
-let LOGO_SIZE: CGFloat = 48
 let TOOLBAR_SIZE: CGFloat = 80
 
 struct Sections {
@@ -18,22 +17,16 @@ struct Sections {
     static let news = 4
 }
 
-class HomeController: UIViewController {
-    
-    let headers: [Int: HeaderItem] = [
-        Sections.new: HeaderItem(label: "Новые товары", more: "Посмотреть все"),
-        Sections.popular: HeaderItem(label: "Популярные товары", more: "Посмотреть все"),
-        Sections.onDiscount: HeaderItem(label: "Скидки", more: "Посмотреть все"),
-        Sections.news: HeaderItem(label: "Новости и акции", more: "Посмотреть все"),
-    ]
+class HomeController: CustomCollectionViewController {
     
     var productsSource = Product.productsSource
     var newsSource = News.newsSource
     
-    var collectionView: UICollectionView!
+    override func delegate() -> CustomCollectionViewControllerDelegate {
+        return self
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func addCollectionViewToScreen() {
         view.backgroundColor = .background
         
         let vContainer = UIStackView(backgroundColor: .clear)
@@ -53,23 +46,7 @@ class HomeController: UIViewController {
             SearchBarItem(image: .heart, onTap: nil),
         ])
         vContainer.addArrangedSubview(searchBar)
-
-        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: configureLayout())
-        collectionView.delegate = self
-        collectionView.dataSource = self
         
-        collectionView.register(
-            BannerCollectionViewCell.self,
-            forCellWithReuseIdentifier: String(describing: BannerCollectionViewCell.self))
-        collectionView.register(
-            ProductCollectionViewCell.self,
-            forCellWithReuseIdentifier: String(describing: ProductCollectionViewCell.self))
-        collectionView.register(
-            NewsCollectionViewCell.self,
-            forCellWithReuseIdentifier: String(describing: NewsCollectionViewCell.self))
-        collectionView.register(SectionHeaderCollectionReusableView.self, forSupplementaryViewOfKind: String(describing: SectionHeaderCollectionReusableView.self), withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self))
-        collectionView.backgroundColor = .clear
-
         vContainer.addArrangedSubview(collectionView)
         
         let toolbar = CustomToolBar()
@@ -83,9 +60,10 @@ class HomeController: UIViewController {
         toolbar.heightAnchor.constraint(equalToConstant: TOOLBAR_SIZE).isActive = true
         vContainer.addArrangedSubview(toolbar)
     }
-    
-    private func configureLayout() -> UICollectionViewCompositionalLayout {
-        
+}
+
+extension HomeController: CustomCollectionViewControllerDelegate {
+    func layout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvronment in
             switch sectionIndex {
             case Sections.banner:
@@ -97,6 +75,22 @@ class HomeController: UIViewController {
             }
         }
         return layout
+    }
+    
+    func collectionViewDelegate() -> UICollectionViewDelegate {
+        return self
+    }
+    
+    func collectionViewDataSource() -> UICollectionViewDataSource {
+        return self
+    }
+    
+    func registerCells() -> [AnyClass] {
+        return [BannerCollectionViewCell.self, ProductCollectionViewCell.self, NewsCollectionViewCell.self]
+    }
+    
+    func registerHeaders() -> [AnyClass] {
+        return [SectionHeaderCollectionReusableView.self]
     }
 }
 
@@ -167,10 +161,41 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch indexPath.section {
-        case Sections.new, Sections.popular, Sections.onDiscount, Sections.news:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self), for: indexPath) as! SectionHeaderCollectionReusableView
+        case Sections.new:
+            let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self),
+                for: indexPath
+            ) as! SectionHeaderCollectionReusableView
             
-            header.configure(header: headers[indexPath.section]!)
+            header.configure(text: "Новые товары", subtitle: "Посмотреть все", onTap: nil)
+            return header
+        case Sections.popular:
+            let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self),
+                for: indexPath
+            ) as! SectionHeaderCollectionReusableView
+            
+            header.configure(text: "Популярные товары", subtitle: "Посмотреть все", onTap: nil)
+            return header
+        case Sections.onDiscount:
+            let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self),
+                for: indexPath
+            ) as! SectionHeaderCollectionReusableView
+            
+            header.configure(text: "Скидки", subtitle: "Посмотреть все", onTap: nil)
+            return header
+        case Sections.news:
+            let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self),
+                for: indexPath
+            ) as! SectionHeaderCollectionReusableView
+            
+            header.configure(text: "Новости и акции", subtitle: "Посмотреть все", onTap: nil)
             return header
         default:
             return UICollectionReusableView()

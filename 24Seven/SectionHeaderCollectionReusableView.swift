@@ -32,10 +32,10 @@ class SectionHeaderCollectionReusableView: UICollectionReusableView {
         more.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
     
-    func configure(header: HeaderItem) {
-        label.text = header.label
-        more.text = header.more
-        if let onTap = header.onTap {
+    func configure(text: String, subtitle: String, onTap: UITapGestureRecognizer?) {
+        label.text = text
+        more.text = subtitle
+        if let onTap = onTap {
             more.isUserInteractionEnabled = true
             more.addGestureRecognizer(onTap)
         }

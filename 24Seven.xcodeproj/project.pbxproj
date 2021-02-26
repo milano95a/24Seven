@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7009403725E912CA00C4938F /* BaseCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009403625E912CA00C4938F /* BaseCollectionViewLayout.swift */; };
+		7009403725E912CA00C4938F /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009403625E912CA00C4938F /* BaseCollectionViewController.swift */; };
 		7009403A25E9197B00C4938F /* CustomToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009403925E9197B00C4938F /* CustomToolBar.swift */; };
 		7009404025E925BD00C4938F /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009403F25E925BD00C4938F /* CustomLabel.swift */; };
 		7009404425E926C300C4938F /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009404325E926C300C4938F /* CustomSearchBar.swift */; };
@@ -27,7 +27,7 @@
 
 /* Begin PBXFileReference section */
 		7009403525E8DF5100C4938F /* 24Seven.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 24Seven.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7009403625E912CA00C4938F /* BaseCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewLayout.swift; sourceTree = "<group>"; };
+		7009403625E912CA00C4938F /* BaseCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewController.swift; sourceTree = "<group>"; };
 		7009403925E9197B00C4938F /* CustomToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolBar.swift; sourceTree = "<group>"; };
 		7009403F25E925BD00C4938F /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		7009404325E926C300C4938F /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				70DE6CF725E6B5A8007B11F3 /* HomeController.swift */,
-				7009403625E912CA00C4938F /* BaseCollectionViewLayout.swift */,
+				7009403625E912CA00C4938F /* BaseCollectionViewController.swift */,
 				7009403E25E9256E00C4938F /* Custom */,
 				70D1239825E8511D00804107 /* Models */,
 				70D1239025E84BEE00804107 /* Cells */,
@@ -203,7 +203,7 @@
 				709B7F9225E79C0500483608 /* NewsCollectionViewCell.swift in Sources */,
 				70D1239325E84ECD00804107 /* Product.swift in Sources */,
 				70DE6CF425E6B5A8007B11F3 /* AppDelegate.swift in Sources */,
-				7009403725E912CA00C4938F /* BaseCollectionViewLayout.swift in Sources */,
+				7009403725E912CA00C4938F /* BaseCollectionViewController.swift in Sources */,
 				70DE6CF625E6B5A8007B11F3 /* SceneDelegate.swift in Sources */,
 				70D1238E25E83EBF00804107 /* SectionHeaderCollectionReusableView.swift in Sources */,
 				709B7F8B25E6D44600483608 /* BannerCollectionViewCell.swift in Sources */,
