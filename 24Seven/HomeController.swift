@@ -10,18 +10,22 @@ import UIKit
 let LOGO_SIZE: CGFloat = 48
 let TOOLBAR_SIZE: CGFloat = 80
 
+struct Sections {
+    static let banner = 0
+    static let new = 1
+    static let popular = 2
+    static let onDiscount = 3
+    static let news = 4
+}
+
 class HomeController: UIViewController {
     
-    let banner = 0
-    let new = 1
-    let popular = 2
-    let onDiscount = 3
-    let news = 4
-    
-    let newHeader = HeaderItem(label: "Новые товары", more: "Посмотреть все")
-    let popularHeader = HeaderItem(label: "Популярные товары", more: "Посмотреть все")
-    let onDiscountHeader = HeaderItem(label: "Скидки", more: "Посмотреть все")
-    let newsHeader = HeaderItem(label: "Новости и акции", more: "Посмотреть все")
+    let headers: [Int: HeaderItem] = [
+        Sections.new: HeaderItem(label: "Новые товары", more: "Посмотреть все"),
+        Sections.popular: HeaderItem(label: "Популярные товары", more: "Посмотреть все"),
+        Sections.onDiscount: HeaderItem(label: "Скидки", more: "Посмотреть все"),
+        Sections.news: HeaderItem(label: "Новости и акции", more: "Посмотреть все"),
+    ]
     
     var productsSource = Product.productsSource
     var newsSource = News.newsSource
@@ -80,16 +84,13 @@ class HomeController: UIViewController {
         vContainer.addArrangedSubview(toolbar)
     }
     
-    private func setupCollectionView() {
-    }
-    
     private func configureLayout() -> UICollectionViewCompositionalLayout {
         
-        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvronment in
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvronment in
             switch sectionIndex {
-            case self?.banner:
+            case Sections.banner:
                 return NSCollectionLayoutSection.banner()
-            case self?.new, self?.popular, self?.onDiscount, self?.news:
+            case Sections.new, Sections.popular, Sections.onDiscount, Sections.news:
                 return NSCollectionLayoutSection.item()
             default:
                 return nil
@@ -104,17 +105,18 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 5
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case banner:
+        case Sections.banner:
             return 10
-        case new:
+        case Sections.new:
             return productsSource.filter {$0.isNew}.count
-        case popular:
+        case Sections.popular:
             return productsSource.filter {$0.isPopular}.count
-        case onDiscount:
+        case Sections.onDiscount:
             return productsSource.filter {$0.discount > 0}.count
-        case news:
+        case Sections.news:
             return newsSource.count
         default:
             return 0
@@ -123,35 +125,35 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
-        case banner:
+        case Sections.banner:
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: String(describing: BannerCollectionViewCell.self),
                 for: indexPath
             ) as! BannerCollectionViewCell
             
             return cell
-        case new:
+        case Sections.new:
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: String(describing: ProductCollectionViewCell.self),
                 for: indexPath
             ) as! ProductCollectionViewCell
             cell.configure(with: productsSource.filter {$0.isNew}[indexPath.item])
             return cell
-        case popular:
+        case Sections.popular:
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: String(describing: ProductCollectionViewCell.self),
                 for: indexPath
             ) as! ProductCollectionViewCell
             cell.configure(with: productsSource.filter {$0.isPopular}[indexPath.item])
             return cell
-        case onDiscount:
+        case Sections.onDiscount:
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: String(describing: ProductCollectionViewCell.self),
                 for: indexPath
             ) as! ProductCollectionViewCell
             cell.configure(with: productsSource.filter {$0.discount > 0}[indexPath.item])
             return cell
-        case news:
+        case Sections.news:
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: String(describing: NewsCollectionViewCell.self),
                 for: indexPath
@@ -165,25 +167,10 @@ extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch indexPath.section {
-        case new:
+        case Sections.new, Sections.popular, Sections.onDiscount, Sections.news:
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self), for: indexPath) as! SectionHeaderCollectionReusableView
             
-            header.configure(header: newHeader)
-            return header
-        case popular:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self), for: indexPath) as! SectionHeaderCollectionReusableView
-            
-            header.configure(header: popularHeader)
-            return header
-        case onDiscount:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self), for: indexPath) as! SectionHeaderCollectionReusableView
-            
-            header.configure(header: onDiscountHeader)
-            return header
-        case news:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: SectionHeaderCollectionReusableView.self), for: indexPath) as! SectionHeaderCollectionReusableView
-            
-            header.configure(header: newsHeader)
+            header.configure(header: headers[indexPath.section]!)
             return header
         default:
             return UICollectionReusableView()
